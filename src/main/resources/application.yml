@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/eipso
+    username: postgres
+    password: root
+
+mybatis:
+  type-aliases-package: com.example.poidemo.entity.* #可使用通配符
+  mapper-locations: classpath:mapper/*.xml #可使用通配符
+  configuration:
+    jdbc-type-for-null: null
+    map-underscore-to-camel-case: true #默认没有设置

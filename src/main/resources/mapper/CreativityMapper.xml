@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.poidemo.mapper.CreativityMapper">
+<!--多对一关系使用association-->
+<!--    一对多关系使用 collection-->
+    <resultMap id="creativityDetail" type="com.example.poidemo.entity.Creativity">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="description" column="description"/>
+        <result property="crtTime" column="crt_time"/>
+        <collection property="creativityPics" javaType="ArrayList" ofType="com.example.poidemo.entity.CreativityPic">
+            <result property="title" column="title"/>
+            <result property="url" column="url"/>
+            <result property="description" column="pic_description"/>
+        </collection>
+    </resultMap>
+    <select id="selectAllDetailCreativity" resultMap="creativityDetail">
+    SELECT c.id,
+c.name,
+c.description,
+c.user_id,
+c.crt_time,
+cp.title,
+cp.url,
+cp.description pic_description
+FROM creativity c
+LEFT JOIN creativity_pic cp ON cp.creativity_id=c.id
+    </select>
+</mapper>
